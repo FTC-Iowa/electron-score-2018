@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "jvens <jeramie.vens@gmail.com>",
   "description": "FTC Iowa Event Management System",
-  "license": null,
+  "license": "Apache-2.0",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -56,10 +56,12 @@
     }
   },
   "dependencies": {
-    "vue": "^2.3.3",
     "axios": "^0.16.1",
+    "firebase": "^5.2.0",
+    "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.5.3",
+    "vuefire": "^2.0.0-alpha.11",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
