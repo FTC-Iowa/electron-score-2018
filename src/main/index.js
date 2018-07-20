@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
+import createServer from './server'
 
 /**
  * Set `__static` path to static files in production
@@ -13,9 +14,12 @@ if (process.env.NODE_ENV !== 'development') {
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+  // : `file://${__dirname}/index.html`
+  : `http://localhost:9999`
 
 function createWindow () {
+  app.server = createServer(app)
+
   /**
    * Initial window options
    */
@@ -30,6 +34,11 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+}
+
+app.respondToClient = (req) => {
+  console.log(req)
+  return "Yep, I'm here!"
 }
 
 app.on('ready', createWindow)

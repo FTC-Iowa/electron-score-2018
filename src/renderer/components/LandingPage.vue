@@ -1,40 +1,19 @@
 <template>
-  <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="left-side">
-        <span class="title">
-          Welcome to your new project!
-        </span>
-        <system-information></system-information>
-      </div>
-
-      <div class="right-side">
-        <div class="doc">
-          <div class="title">Getting Started</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from
-            internal configurations, using the project structure, building your application,
-            and so much more.
-          </p>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
-        </div>
-        <div class="doc">
-          <div class="title alt">Other Documentation</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-        </div>
-      </div>
-    </main>
-  </div>
+  <p>hello world</p>
 </template>
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
-
+  import {db} from '../main'
   export default {
     name: 'landing-page',
     components: { SystemInformation },
+    data: () => ({
+      events: [{index: '0', name: 'test'}]
+    }),
+    firestore: () => ({
+      events: db.collection('matches').orderBy('index', 'desc')
+    }),
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -43,9 +22,17 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+  .md-app {
+    min-width: vh;
+  }
 
+  .md-drawer {
+    width: 230px;
+    max-width: calc(100vw - 125px);
+  }
+/*
   * {
     box-sizing: border-box;
     margin: 0;
@@ -125,4 +112,5 @@
     color: #42b983;
     background-color: transparent;
   }
+  */
 </style>

@@ -57,9 +57,15 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "express": "^4.16.3",
     "firebase": "^5.2.0",
+    "gun": "^0.9.9995",
+    "roboto-fontface": "^0.9.0",
     "vue": "^2.3.3",
+    "vue-console": "^2.1.1",
     "vue-electron": "^1.0.6",
+    "vue-gun": "0.0.3",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^2.5.3",
     "vuefire": "^2.0.0-alpha.11",
     "vuex": "^2.3.1"
@@ -67,7 +73,7 @@
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.1",
+    "babel-loader": "^7.1.5",
     "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
@@ -110,7 +116,9 @@
     "mocha": "^5.2.0",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",
+    "node-sass": "^4.9.2",
     "require-dir": "^0.3.0",
+    "sass-loader": "^7.0.3",
     "spectron": "^3.7.1",
     "style-loader": "^0.18.2",
     "url-loader": "^1.0.1",
@@ -120,7 +128,7 @@
     "vue-template-compiler": "^2.4.2",
     "webpack": "^3.5.2",
     "webpack-dev-server": "^2.7.1",
-    "webpack-hot-middleware": "^2.18.2",
+    "webpack-hot-middleware": "^2.22.3",
     "webpack-merge": "^4.1.0"
   }
 }
