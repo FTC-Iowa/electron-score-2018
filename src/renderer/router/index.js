@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/matches',
+      name: 'matches-page',
+      component: require('@/components/MatchesPage').default
+    },
+    {
       path: '*',
       redirect: '/'
     }
