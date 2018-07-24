@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import createServer from './server'
+require('electron-debug')({ showDevTools: true })
 
 /**
  * Set `__static` path to static files in production
@@ -14,8 +15,8 @@ if (process.env.NODE_ENV !== 'development') {
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
-  // : `file://${__dirname}/index.html`
-  : `http://localhost:9999`
+  : `file://${__dirname}/index.html`
+  // : `http://localhost:9999`
 
 function createWindow () {
   app.server = createServer(app)
@@ -28,6 +29,8 @@ function createWindow () {
     useContentSize: true,
     width: 1000
   })
+
+  console.log('winURL', winURL)
 
   mainWindow.loadURL(winURL)
 
