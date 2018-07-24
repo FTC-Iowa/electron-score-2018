@@ -11,9 +11,24 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/teams',
+      name: 'teams-page',
+      component: require('@/components/TeamsPage').default
+    },
+    {
+      path: '/inspections',
+      name: 'inspections-page',
+      component: require('@/components/InspectionsPage').default
+    },
+    {
       path: '/matches',
       name: 'matches-page',
       component: require('@/components/MatchesPage').default
+    },
+    {
+      path: '/judging',
+      name: 'judging-page',
+      component: require('@/components/JudgingPage').default
     },
     {
       path: '*',

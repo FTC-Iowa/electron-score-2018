@@ -1,13 +1,19 @@
 <template>
-  <p>hello world</p>
+  <div>
+    <md-tabs>
+      <md-tab id="tab-event" md-label="Event"></md-tab>
+      <md-tab id="tab-volunteers" md-label="Volunteers"></md-tab>
+      <md-tab id="tab-schedule" md-label="Schedule"></md-tab>
+      <md-tab id="tab-advanced" md-label="Advanced"></md-tab>
+    </md-tabs>
+  </div>
 </template>
 
 <script>
-  import SystemInformation from './LandingPage/SystemInformation'
   import {db} from '../main'
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    components: {  },
     data: () => ({
       events: [{index: '0', name: 'test'}]
     }),

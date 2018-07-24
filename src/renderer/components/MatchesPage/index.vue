@@ -65,11 +65,11 @@ export default {
     MatchScoreCard
   },
   data: () => ({
-    matchesGenerated: false
+    matchesGenerated: true
   }),
   methods: {
     generateMatchList () {
-      // this.$console.log("Generating match list...");
+      this.$console.log("Generating match list...");
       this.matchesGenerated = true;
     }
   },
