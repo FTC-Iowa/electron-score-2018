@@ -1,43 +1,44 @@
 <template>
-  <md-app md-mode="fixed">
-    <md-app-toolbar id="toolbar" class="md-primary">
-      <div class="color-strip md-elevation-5">
-        <table cellspacing=0px cellpadding=0px >
-          <tr>
-            <td style="background-color:#00a651"></td>
-            <td style="background-color:#ed1c24"></td>
-            <td style="background-color:#f57e25"></td>
-            <td style="background-color:#009cd7"></td>
-          </tr>
-        </table>
-      </div>
+  <div>
+    <md-app md-mode="fixed" :class="appClasses">
+      <md-app-toolbar id="toolbar" class="md-primary">
+        <div class="color-strip md-elevation-5">
+          <table cellspacing=0px cellpadding=0px >
+            <tr>
+              <td style="background-color:#00a651"></td>
+              <td style="background-color:#ed1c24"></td>
+              <td style="background-color:#f57e25"></td>
+              <td style="background-color:#009cd7"></td>
+            </tr>
+          </table>
+        </div>
 
-      <router-link class="md-title" ref="title" to="/">Electron Scoring System</router-link>
-    </md-app-toolbar>
+        <router-link class="md-title" ref="title" to="/">Electron Scoring System</router-link>
+      </md-app-toolbar>
 
-    <md-app-drawer md-permanent="clipped">
-      <navigation-drawer/>
-    </md-app-drawer>
+      <md-app-drawer md-permanent="clipped">
+        <navigation-drawer/>
+      </md-app-drawer>
 
-    <md-app-content>
-      <div>
-      <router-view />
-      <!-- <v-console :settings="consoleSettings"/> -->
-      </div>
-    </md-app-content>
+      <md-app-content>
+        <div>
+          <router-view />
+        </div>
+      </md-app-content>
 
-  </md-app>
+    </md-app>
+    <console v-on:console-visible="onConsoleVisibleChange"/>
+  </div>
 </template>
 
 <script>
   import NavigationDrawer from './components/Layout/NavigationDrawer'
-  // import SystemInformation from './LandingPage/SystemInformation'
-  // import {db} from '../main'
   export default {
     name: 'landing-page',
     components: { NavigationDrawer },
     data: () => ({
       events: [{index: '0', name: 'test'}],
+      consoleVisible: false,
       consoleSettings: {
         placeholder: '>',
         helpCmd: 'help',
@@ -48,9 +49,19 @@
     firestore: () => ({
       // events: db.collection('matches').orderBy('index', 'desc')
     }),
+    computed: {
+      appClasses () {
+        return {
+          'console-padding': this.consoleVisible
+        }
+      }
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
+      },
+      onConsoleVisibleChange(visible) {
+        this.consoleVisible = visible
       }
     }
   }
@@ -67,19 +78,7 @@
     max-width: calc(100vw - 125px);
   }
 
-  .console-panel {
-    // position: unset !important;
-    height: 200px !important;
-    top: unset !important;
-    bottom: 0px;
-    margin-top: unset !important;
-    .console-display {
-      height: 200px !important;
-      position: unset !important;
-      padding-bottom: 20px !important;
-    }
-    .input {
-      position: absolute !important;
-    }
+  .console-padding {
+    padding-bottom: 200px;
   }
 </style>

@@ -18,8 +18,8 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 Vue.use(VueMaterial)
 
-// import console from 'vue-console'
-// Vue.use(console)
+ import console from './components/Console'
+ Vue.use(console)
 
 import App from './App'
 import router from './router'
@@ -51,6 +51,8 @@ const gun = new Gun(gunPeers)
 Vue.use(VueGun, {
     gun: gun
 })
+
+// console.log("starting vue")
 
 /* eslint-disable no-new */
 new Vue({
