@@ -95,7 +95,7 @@ export default {
                     args.unshift(type)
                     this.logs.push(args.join(' '))
             }
-            this.$nextTick(function() { this.$refs.console.scrollTop = this.$refs.console.scrollHeight })
+            this.$nextTick(function() { if (this.$refs.console) this.$refs.console.scrollTop = this.$refs.console.scrollHeight })
         }
     }
 
