@@ -83,14 +83,8 @@
                     <td class="center">Yellow Card</td>
                     <td class="center">Red Card</td>
                 </tr>
-                <tr>
-                    <td class="center">1234</td>
-                    <td class="center"><md-checkbox /></td>
-                    <td class="center"><md-checkbox /></td>
-                    <td class="center"><md-checkbox /></td>
-                </tr>
-                <tr>
-                    <td class="center">5678</td>
+                <tr v-for="team in match[teamcolor].teams" :key="team.number">
+                    <td class="center">{{team.number}}</td>
                     <td class="center"><md-checkbox /></td>
                     <td class="center"><md-checkbox /></td>
                     <td class="center"><md-checkbox /></td>
@@ -102,7 +96,7 @@
 
 <script>
 export default {
-    props: ['teamcolor'],
+    props: ['teamcolor', 'matchid'],
 
     computed: {
         colorClass() {
@@ -110,6 +104,9 @@ export default {
                 'color-red': this.teamcolor === 'red',
                 'color-blue': this.teamcolor === 'blue'
             }
+        },
+        match() {
+            return this.$store.getters.get_match(this.matchid);
         }
     }
 

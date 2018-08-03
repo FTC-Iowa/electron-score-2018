@@ -5,57 +5,33 @@
             <span class="md-list-item-text header">Match</span>
             <span class="header">Visible</span>
         </md-list-item>
-        <md-list-item>
-            <md-checkbox class="md-dense"/>
-            <div class="md-list-item-text">
-                <span>Q-1</span>
-                <span>Red 138-125</span>
-            </div>
-            <md-button class="md-icon-button md-list-action md-dense">
-                <md-icon>visibility_off</md-icon>
-            </md-button>
-        </md-list-item>
-        <md-list-item>
-            <md-checkbox />
-            <div class="md-list-item-text">
-                <span>Q-2</span>
-                <span>Red 138-125</span>
-            </div>
-            <md-button class="md-icon-button md-list-action md-dense">
-                <md-icon>visibility_off</md-icon>
-            </md-button>
-        </md-list-item>
-        <md-list-item>
-            <md-checkbox />
-            <div class="md-list-item-text">
-                <span>Q-3</span>
-                <span>Blue 138-145</span>
-            </div>
-            <md-button class="md-icon-button md-list-action md-dense">
-                <md-icon>visibility_off</md-icon>
-            </md-button>
-        </md-list-item>
-        <md-list-item>
-            <md-checkbox />
-            <div class="md-list-item-text">
-                <span>Q-4</span>
-            </div>
-            <md-button class="md-icon-button md-list-action md-dense">
-                <md-icon>visibility_off</md-icon>
-            </md-button>
-        </md-list-item>
+        <match-score-list-line v-for="match in $store.getters.get_match_list" :key="match.id" :id="match.id" @SelectMatch="SwitchMatch($event)" :active="activeMatchId===match.id"/>
     </md-list>
 </template>
 
 <script>
+import MatchScoreListLine from './MatchScoreListLine'
+
 export default {
+    name: "MatchScoreList",
+    components: {MatchScoreListLine},
+    props: ["activeMatchId"],
+    data: () => ({
+    }),
+    methods: {
+        SwitchMatch(id) {
+            this.$console.log("Switch active match to $" + id)
+            this.$emit('SelectMatch', id)
+        }
+    }
 
 }
 </script>
 
-<style>
+<style scoped>
 .header {
     font-weight: bold;
+    color: black !important;
 }
 
 </style>
