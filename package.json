@@ -59,7 +59,7 @@
     "axios": "^0.16.1",
     "express": "^4.16.3",
     "firebase": "^5.2.0",
-    "gun": "^0.9.9995",
+    "gun": "^0.9.9998",
     "roboto-fontface": "^0.9.0",
     "vue": "^2.3.3",
     "vue-console": "^2.1.1",

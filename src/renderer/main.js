@@ -10,8 +10,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 
-import VueGun from 'vue-gun'
-import Gun from 'gun'
+// import VueGun from 'vue-gun'
+// import Gun from 'gun'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
@@ -47,10 +47,10 @@ export const storage = firestorage
 const gunPeers = [
     'http://localhost:9080/gun'
 ]
-const gun = new Gun(gunPeers)
-Vue.use(VueGun, {
-    gun: gun
-})
+// const gun = new Gun({peers: gunPeers, radisk: true, localStorage: true})
+// Vue.use(VueGun, {
+//     gun: gun
+// })
 
 // console.log("starting vue")
 
