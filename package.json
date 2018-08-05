@@ -23,7 +23,7 @@
   },
   "build": {
     "productName": "ftc-electron-score",
-    "appId": "org.simulatedgreg.electron-vue",
+    "appId": "org.firstinspiresiowa.electron-score",
     "directories": {
       "output": "build"
     },
@@ -52,7 +52,8 @@
       "icon": "build/icons/icon.ico"
     },
     "linux": {
-      "icon": "build/icons"
+      "icon": "build/icons",
+      "asar": false
     }
   },
   "dependencies": {
@@ -61,10 +62,7 @@
     "firebase": "^5.3.1",
     "gun": "^0.9.9998",
     "material-design-icons": "^3.0.1",
-    "material-icons": "^0.2.3",
-    "roboto-fontface": "^0.9.0",
     "vue": "^2.5.17",
-    "vue-console": "^2.1.1",
     "vue-electron": "^1.0.6",
     "vue-gun": "0.0.3",
     "vue-material": "^1.0.0-beta-10.2",

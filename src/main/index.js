@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import createServer from './server'
+import createGunServer from './gunserver'
 require('electron-debug')({ showDevTools: true })
 
 /**
@@ -20,6 +21,7 @@ const winURL = process.env.NODE_ENV === 'development'
 
 function createWindow () {
   app.server = createServer(app)
+  createGunServer(app)
 
   /**
    * Initial window options
@@ -40,7 +42,7 @@ function createWindow () {
 }
 
 app.respondToClient = (req) => {
-  console.log(req)
+  //console.log(req)
   return "Yep, I'm here!"
 }
 
