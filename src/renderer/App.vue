@@ -28,14 +28,18 @@
 
     </md-app>
     <console v-on:console-visible="onConsoleVisibleChange"/>
+
+    <gun-database />
   </div>
 </template>
 
 <script>
   import NavigationDrawer from './components/Layout/NavigationDrawer'
+  import GunDatabase from './components/GunDatabase'
+
   export default {
     name: 'landing-page',
-    components: { NavigationDrawer },
+    components: { NavigationDrawer, GunDatabase },
     data: () => ({
       events: [{index: '0', name: 'test'}],
       consoleVisible: false,
@@ -69,6 +73,9 @@
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+  // @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic');
+  @import "~material-design-icons/iconfont/material-icons.css";
+  
   .md-app {
     height: 100vh;
   }
@@ -80,5 +87,28 @@
 
   .console-padding {
     padding-bottom: 200px;
+  }
+
+  .md-app-toolbar {
+    padding-top: 10px;
+  }
+
+  .color-strip {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    top: 0;
+    left: 0;
+
+    table {
+      width: 100%;
+      height: 100%;
+    }
+
+    td {
+      width: 25%;
+      height: 100%;
+
+    }
   }
 </style>

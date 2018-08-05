@@ -8,6 +8,16 @@ const mutations = {
         // state.list[match.id] = match
         // state.ids.push(match.id);
         state.list.push(match)
+    },
+    update_matches(state, matches) {
+        state.list = matches;
+        // for(var match in matches){
+        //     var m = matches[match];
+        //     m.id = match;
+
+        // }
+
+        console.log("update match: ", matches)
     }
 }
 
@@ -17,13 +27,10 @@ const actions = {
 
 const getters = {
     get_match: (state) => (matchid) => {
-        return state.list.find(match => match.id === matchid);
+        // return state.list.find(match => match.id === matchid);
+        return state.list[matchid]
     },
     get_match_list(state) {
-        // var rv = [];
-        // for (var id in state.ids) {
-        //     rv.push(state.list[id])
-        // }
         return state.list;
     }
 }

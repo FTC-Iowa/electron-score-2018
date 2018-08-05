@@ -36,7 +36,7 @@
                   <md-icon>chevron_right</md-icon>
                 </md-button> -->
                 <div class="md-toolbar-section-end">
-                  <md-button class="md-raised md-primary">Save</md-button>
+                  <md-button class="md-raised md-primary" @click="saveMatch()">Save</md-button>
                   <md-button class="md-raised md-accent">Clear</md-button>
                 </div>
               </md-toolbar>
@@ -58,6 +58,8 @@
 <script>
 import MatchScoreList from './MatchScoreList'
 import MatchScoreCard from './MatchScoreCard'
+require('gun/lib/open.js')
+
 export default {
   name: 'MatchesPage',
   components: {
@@ -82,19 +84,28 @@ export default {
       var j = 0;
 
 
-      // var matches = this.$gun.get('matches')
+      var matches = this.$gun.get('matches')
+      matches.open((match) => {
+        this.$console.log("gun: match changed: " + JSON.stringify(match))
+        console.log(match)
+      })
+      console.log(matches)
 
       for ( var i = 1; i < 1 + (numTeams * 5) / 4; i++) {
-        var match = { number: i, id: i, name: 'Q-' + (i), red: {teams: [{}, {}],}, blue: {teams: [{}, {}]}};
-        match.red.teams[0].number = teams[(j++)%numTeams];
-        match.red.teams[1].number = teams[(j++)%numTeams];
-        match.blue.teams[0].number = teams[(j++)%numTeams];
-        match.blue.teams[1].number = teams[(j++)%numTeams];
+        var id = 'match_q_' + i;
+        var match = { number: i, id: id, name: 'Q-' + (i), red: {team0: {}, team1: {}}, blue: {team0: {}, team1: {}}};
+        match.red.team0.number = teams[(j++)%numTeams];
+        match.red.team1.number = teams[(j++)%numTeams];
+        match.blue.team0.number = teams[(j++)%numTeams];
+        match.blue.team1.number = teams[(j++)%numTeams];
         this.$console.log('Match: ', JSON.stringify(match));
 
-        this.$store.commit('create_match', match)
+        matches.get(id).put(match)
 
-        // var newMatch = matches.get(Date.now().toString());
+
+        // this.$store.commit('create_match', match)
+
+        // var newMatch = matches.get("match"+i);
         // this.$console.log('1')
         // newMatch.put(match);
         // this.$console.log('2')
@@ -109,6 +120,17 @@ export default {
     SwitchMatch(id) {
       this.$console.log("Switch active match to $" + id + ' in parent')
       this.activeMatchId = id;
+    },
+    saveMatch() {
+      this.$console.log("Save match " + this.activeMatchId)
+      var saved = {
+        saved: true,
+        red: this.activeMatch.red.score.total,
+        blue: this.activeMatch.blue.score.total
+      }
+
+      this.$gun.get('matches').get(this.activeMatchId).put({saved: saved})
+
     }
   },
   commands: {
