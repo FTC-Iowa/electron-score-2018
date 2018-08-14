@@ -154,6 +154,9 @@ export default {
             }
         }
     }),
+    gunfire: {
+        score: 'matches/$matchid/$teamcolor/score'
+    },
     mounted() {
         // var match = this.$store.getters.get_match(this.matchid);
         // if(match && match[this.teamcolor].score) {

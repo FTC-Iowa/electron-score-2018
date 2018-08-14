@@ -18,7 +18,13 @@ export default {
     components: {MatchScoreListLine},
     props: ["activeMatchId"],
     data: () => ({
+        matches: {}
     }),
+    // gunfire: () => {
+    //     return {
+    //         matches: 'matches'
+    //     }
+    // },
     methods: {
         SwitchMatch(id) {
             this.$console.log("Switch active match to $" + id)

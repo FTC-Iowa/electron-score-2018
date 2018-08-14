@@ -15,11 +15,11 @@
             </div>
             <div class="md-layout-item">
               <md-toolbar class="md-dense">
-                <md-button class="md-icon-button" @click="activeMatchId--">
+                <md-button class="md-icon-button" @click="prevMatch()">
                   <md-icon>chevron_left</md-icon>
                 </md-button>
                 <h3 class="md-title" style="flex:1;margin:0;text-align:center;">{{activeMatch ? activeMatch.name : ""}}</h3>
-                <md-button class="md-icon-button" @click="activeMatchId++">
+                <md-button class="md-icon-button" @click="nextMatch()">
                   <md-icon>chevron_right</md-icon>
                 </md-button>
               </md-toolbar>
@@ -68,12 +68,12 @@ export default {
   },
   data: () => ({
     matchesGenerated: true,
-    activeMatchId: 1
+    activeMatchId: 'match_q_1'
   }),
   computed: {
     activeMatch() {
       return this.$store.getters.get_match(this.activeMatchId)
-    }
+    },
   },
   methods: {
     generateMatchList () {
@@ -85,11 +85,11 @@ export default {
 
 
       var matches = this.$gun.get('matches')
-      matches.open((match) => {
-        this.$console.log("gun: match changed: " + JSON.stringify(match))
-        console.log(match)
-      })
-      console.log(matches)
+      // matches.open((match) => {
+      //   this.$console.log("gun: match changed: " + JSON.stringify(match))
+      //   console.log(match)
+      // })
+      // console.log(matches)
 
       for ( var i = 1; i < 1 + (numTeams * 5) / 4; i++) {
         var id = 'match_q_' + i;
@@ -101,21 +101,19 @@ export default {
         this.$console.log('Match: ', JSON.stringify(match));
 
         matches.get(id).put(match)
-
-
-        // this.$store.commit('create_match', match)
-
-        // var newMatch = matches.get("match"+i);
-        // this.$console.log('1')
-        // newMatch.put(match);
-        // this.$console.log('2')
-        // matches.set(newMatch)
-        // this.$console.log('3')
       }
 
 
 
       this.matchesGenerated = true;
+    },
+    nextMatch() {
+      var next = this.$store.getters.get_match_by_number(this.activeMatch.number+1)
+      if (next) this.activeMatchId = next.id
+    },
+    prevMatch() {
+      var next = this.$store.getters.get_match_by_number(this.activeMatch.number-1)
+      if (next) this.activeMatchId = next.id
     },
     SwitchMatch(id) {
       this.$console.log("Switch active match to $" + id + ' in parent')

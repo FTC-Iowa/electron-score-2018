@@ -1,6 +1,8 @@
 /* eslint-disable */
 
 // import('roboto-fontface/css/roboto/roboto-fontface.css')
+// console.log('main.js')
+
 
 import Vue from 'vue'
 import axios from 'axios'
@@ -16,14 +18,15 @@ import Gun from 'gun/gun'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+// import 'vue-material/dist/theme/default.css'
+import 'vue-material/dist/theme/default-dark.css'
 Vue.use(VueMaterial)
 
  import console from './components/Console'
  Vue.use(console)
 
 import App from './App'
-import router from './router'
+import router from './electron/router'
 import store from './store'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
@@ -54,7 +57,8 @@ Vue.use(VueGun, {
 })
 
 
-
+//import gunFire from './gunfire'
+//Vue.use(gunFire)
 
 
 // console.log("starting vue")

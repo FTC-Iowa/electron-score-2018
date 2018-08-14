@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="console-panel" v-if="visible">
+    <div class="console-panel" v-if="value">
         <div ref="console" class="console-display">
             <div v-for="(item,index) in logs" :key="index" v-html="item" />
         </div>
@@ -27,14 +27,14 @@
 export default {
     name: 'console',
     props: {
-        // visible: true
+        value: true
     },
     data: () => ({
         cmd: '',
         logs: [],
         history: [],
         commands: {},
-        visible: false,
+        visible: true,
         config: {
             hotkey: 192 // '~'
         }        
@@ -43,7 +43,7 @@ export default {
         this.hotKeyListener && window.removeEventListener('keydown', this.hotKeyListener)
     },
     created() {
-        this.toggle(this.visible)
+        this.toggle(this.value)
         this.$console.log = this.log
         // this.$console.dispatch = this.dispatch
         // this.$console.toggle = this.toggle
@@ -62,7 +62,7 @@ export default {
                 this.visible = !this.visible;
             // this.$console.visible = this.visible
             this.$set(this.$console, 'visible', this.visible)
-            this.$emit('console-visible', this.visible)
+            this.$emit('input', this.visible)
         },
         keyhandler(e) {
             switch(e.keyCode) {

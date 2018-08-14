@@ -13,6 +13,7 @@ const Multispinner = require('multispinner')
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 const webConfig = require('./webpack.web.config')
+const clientConfig = require('./webpack.client.config')
 
 const doneLog = chalk.bgGreen.white(' DONE ') + ' '
 const errorLog = chalk.bgRed.white(' ERROR ') + ' '
@@ -34,7 +35,7 @@ function build () {
 
   del.sync(['dist/electron/*', '!.gitkeep'])
 
-  const tasks = ['main', 'renderer']
+  const tasks = ['main', 'renderer', 'client']
   const m = new Multispinner(tasks, {
     preText: 'building',
     postText: 'process'
@@ -68,7 +69,18 @@ function build () {
     console.error(`\n${err}\n`)
     process.exit(1)
   })
+  
+  pack(clientConfig).then(result => {
+    result += result + '\n\n'
+    m.success('client')
+  }).catch(err => {
+    m.error('renderer')
+    console.log(`\n ${errorLog}failed to build client process`)
+    console.error(`'n${err}\n`)
+    process.exit(1)
+  })
 }
+
 
 function pack (config) {
   return new Promise((resolve, reject) => {

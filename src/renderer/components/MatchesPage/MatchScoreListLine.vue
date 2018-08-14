@@ -1,5 +1,6 @@
 <template>
-    <md-list-item v-if='id' @click="onClick()" :class="activeClasses">
+    <md-list-item v-if='match' @click="onClick()" :class="activeClasses">
+        <!-- {{this.match}} -->
         <md-checkbox v-model='match.saved' disabled :trueValue='match.saved'/>
         <div class="md-list-item-text">
             <span>{{match.name}}</span>
@@ -16,7 +17,11 @@ export default {
     name: 'MatchScoreListLine',
     props: ['id','active'],
     data: () => ({
+        // match: {}
     }),
+    // gunfire: {
+    //     match: 'matches/$id'
+    // },
     computed: {
         matchWinnerColor() {
             if (this.match.saved.red > this.match.saved.blue) {
@@ -28,6 +33,7 @@ export default {
             }
         },
         match() {
+            console.log('list id=', this.id)
             return this.$store.getters.get_match(this.id);
         },
         activeClasses() {
@@ -36,7 +42,7 @@ export default {
             }
         },
         isSaved() {
-            return match.saved && match.saved.saved
+            return match && match.saved && match.saved.saved
         }
     },
     methods: {

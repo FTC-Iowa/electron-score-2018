@@ -72,7 +72,7 @@
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+  // @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
   // @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic');
   @import "~material-design-icons/iconfont/material-icons.css";
   

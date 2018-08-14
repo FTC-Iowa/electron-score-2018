@@ -11,6 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
+const clientConfig = require('./webpack.client.config')
 
 let electronProcess = null
 let manualRestart = false
@@ -74,6 +75,46 @@ function startRenderer () {
     )
 
     server.listen(9080)
+  })
+}
+
+function startClient () {
+  return new Promise((resolve, reject) => {
+    console.log('startclient()')
+    clientConfig.entry.web = [path.join(__dirname, 'dev-client')].concat(clientConfig.entry.web)
+
+    const compiler = webpack(clientConfig)
+    hotMiddleware = webpackHotMiddleware(compiler, { 
+      log: false, 
+      heartbeat: 2500 
+    })
+
+    compiler.plugin('compilation', compilation => {
+      compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
+        hotMiddleware.publish({ action: 'reload' })
+        cb()
+      })
+    })
+
+    compiler.plugin('done', stats => {
+      logStats('Client', stats)
+    })
+
+    const server = new WebpackDevServer(
+      compiler,
+      {
+        contentBase: path.join(__dirname, '../'),
+        quiet: true,
+        before (app, ctx) {
+          app.use(hotMiddleware)
+          ctx.middleware.waitUntilValid(() => {
+            resolve()
+          })
+        }
+      }
+    )
+
+    server.listen(9090)
   })
 }
 
@@ -166,7 +207,7 @@ function greeting () {
 function init () {
   greeting()
 
-  Promise.all([startRenderer(), startMain()])
+  Promise.all([startRenderer(), startMain(), startClient()])
     .then(() => {
       startElectron()
     })
